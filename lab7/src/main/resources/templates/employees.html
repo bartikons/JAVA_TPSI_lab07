@@ -48,8 +48,8 @@
                     <td th:text='${employees.jobTitle}'></td>
                     <td th:text='${#numbers.formatDecimal(employees.salary,3,"WHITESPACE",2,"POINT")}'></td>
                     <td th:text='| ${#calendars.format(employees.dateOfEmployment,"dd.MM.yyyy")}'></td>
-                    <td ><p th:text=' ${#calendars.format(employees.dateOfTermination,"dd.MM.yyyy") ?: "wciąż pracuje"}'  th:classappend='${employees.dateOfTermination} ? fired' >wciąż pracuje</p></td>
-                    <td><p th:each="skill : ${employees.skills}" th:text='|${skill.name} (${skill.level})|'></p></td>
+                    <td ><p th:text=' ${#calendars.format(employees.dateOfTermination,"dd.MM.yyyy") ?: "wciąż pracuje"}'  th:class='fired' >wciąż pracuje</p></td>
+                    <td><p th:each="skill,iterStat : ${employees.skills}" th:if="${iterStat != last}" th:text='!${iterStat.last} ? |${skill.name} (${skill.level}),| : |${skill.name} (${skill.level})|    '></p></td>
                     <td><p th:each="comments : ${employees.comments}" th:text='|${comments}|'></p></td>
                     <td ><img th:src='${employees.photoUrl}' th:class='empPhoto'/></td>
                 </tr>
